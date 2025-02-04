@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DDay.iCal.Serialization;
-using System.IO;
-using System.Xml;
-using System.Reflection;
-using DDay.iCal.Serialization.iCalendar;
-
-namespace DDay.iCal.Validator.RFC5545
+﻿namespace Ical.Net.Validator.RFC5545
 {
 	public class RulesetValidator :
 		Validation,
@@ -95,15 +86,15 @@ namespace DDay.iCal.Validator.RFC5545
 
 					try
 					{
-						Calendars = DDay.iCal.iCalendar.LoadFromStream(new StringReader(_iCalendarText));
+						Calendars = CalendarCollection.Load(new StringReader(_iCalendarText));
 					}
-					catch (antlr.RecognitionException ex)
+					catch (Antlr4.Runtime.RecognitionException ex)
 					{
 					}
 				}
 			}
 		}
-		public IICalendarCollection Calendars { get; set; }
+		public CalendarCollection Calendars { get; set; }
 		public IValidationRuleset Ruleset { get { return _Ruleset; } }
 
 		#endregion

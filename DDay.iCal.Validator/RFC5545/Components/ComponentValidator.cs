@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Ical.Net.CalendarComponents;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
     public class ComponentValidator :
         CalendarObjectValidation
     {
         #region Constructors
 
-        public ComponentValidator(IResourceManager mgr, IICalendarCollection calendars) : base(mgr, calendars)
+        public ComponentValidator(IResourceManager mgr, CalendarCollection calendars) : base(mgr, calendars)
         {
         }
 

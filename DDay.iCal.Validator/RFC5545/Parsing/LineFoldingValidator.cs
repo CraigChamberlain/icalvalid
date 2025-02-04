@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-
-namespace DDay.iCal.Validator.RFC5545
+﻿namespace Ical.Net.Validator.RFC5545
 {
     public class LineFoldingValidator :
         Validation
@@ -33,16 +28,19 @@ namespace DDay.iCal.Validator.RFC5545
             try
             {
                 StringReader sr = new StringReader(iCalText);
-                IICalendarCollection calendar = iCalendar.LoadFromStream(sr);
+                Calendar calendar = Calendar.Load(sr);
 
                 result.Passed = true;
             }
-            catch (antlr.MismatchedTokenException ex)
-            {
-                if (ex.expecting == 6 && // COLON = 6
-                    ex.mismatchType == antlr.MismatchedTokenException.TokenTypeEnum.TokenType)
-                    Fatal(result, "lineFoldingWithoutSpaceError", ex.line, ex.column, ex.Message, null);
-            }
+            catch (Exception ex) { throw ex; }
+            //TODO work out if Antlr4 has a Mismatch token and what to do with it?
+            //
+            //catch (Antlr4. ex)
+            //{
+            //    if (ex.expecting == 6 && // COLON = 6
+            //        ex.mismatchType ==  Antlr4.MismatchedTokenException.TokenTypeEnum.TokenType)
+            //        Fatal(result, "lineFoldingWithoutSpaceError", ex.line, ex.column, ex.Message, null);
+            //}
 
             return result;
         }

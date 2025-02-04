@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DDay.iCal.Validator.Xml;
+﻿using Ical.Net.Validator.Xml;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public interface IResourceManager
     {

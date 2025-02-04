@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Resources;
-using System.Reflection;
-using System.IO;
-
-namespace DDay.iCal.Validator.RFC5545
+﻿namespace Ical.Net.Validator.RFC5545
 {
     public class CalScaleValidator : 
         Validation
     {
         #region Public Properties
 
-        public IICalendarCollection Calendars { get; set; }
+        public CalendarCollection Calendars { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public CalScaleValidator(IResourceManager mgr, IICalendarCollection calendars) :
+        public CalScaleValidator(IResourceManager mgr, CalendarCollection calendars) :
             base(mgr)
         {
             Calendars = calendars;
@@ -35,7 +28,7 @@ namespace DDay.iCal.Validator.RFC5545
 
             if (Calendars != null)
             {
-                foreach (IICalendar calendar in Calendars)
+                foreach (Calendar calendar in Calendars)
                 {
                     results.Add(ValidationResult.GetCompositeResults(
                         ResourceManager,

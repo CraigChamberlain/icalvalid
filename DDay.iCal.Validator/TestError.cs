@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+﻿using System.Text;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class TestError :
         ITestError

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
-namespace DDay.iCal.Validator.Xml
+namespace Ical.Net.Validator.Xml
 {
     public class XmlValidationRule :
         ValidationRule
@@ -54,7 +51,7 @@ namespace DDay.iCal.Validator.Xml
         {
             get
             {
-                Type type = Type.GetType("DDay.iCal.Validator.RFC5545." + Name + "Validator, DDay.iCal.Validator", false, true);
+                Type type = Type.GetType("Ical.Net.Validator.RFC5545." + Name + "Validator, Ical.Net.Validator", false, true);
                 return type;                
             }
             protected set

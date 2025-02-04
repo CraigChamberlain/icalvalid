@@ -1,4 +1,4 @@
-﻿namespace DDay.iCal.Validator
+﻿namespace Ical.Net.Validator
 {
 	public interface ILogger
 	{

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ical.Net.DataTypes;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class EncodableDataTypeValidation :
         Validation

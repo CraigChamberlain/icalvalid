@@ -5,7 +5,7 @@ using System.Resources;
 using System.Reflection;
 using System.IO;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
     public class VersionValidator :
         Validation
@@ -13,13 +13,13 @@ namespace DDay.iCal.Validator.RFC5545
         #region Public Properties
 
         public string iCalText { get; set; }
-        public IICalendarCollection Calendars { get; set; }
+        public CalendarCollection Calendars { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public VersionValidator(IResourceManager mgr, string icalText, IICalendarCollection calendars) :
+        public VersionValidator(IResourceManager mgr, string icalText, CalendarCollection calendars) :
             base(mgr)
         {
             iCalText = icalText;
@@ -34,7 +34,7 @@ namespace DDay.iCal.Validator.RFC5545
         {
             ValidationResultCollection result = new ValidationResultCollection(ResourceManager, "version");
 
-            foreach (IICalendar calendar in Calendars)
+            foreach (Calendar calendar in Calendars)
             {
                 result.Add(
                     ValidationResult.GetCompositeResults(

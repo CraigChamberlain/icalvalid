@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DDay.iCal.Validator
+﻿
+namespace Ical.Net.Validator
 {
     public class PropertyCountValidation :
         Validation

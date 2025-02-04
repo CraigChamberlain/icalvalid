@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ical.Net.DataTypes;
 using System.Text.RegularExpressions;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class StringPropertyValidation :
         PropertyValidation

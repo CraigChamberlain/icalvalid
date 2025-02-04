@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ical.Net.CalendarComponents;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public abstract class EventValidation :
         Validation
@@ -10,13 +8,13 @@ namespace DDay.iCal.Validator
         #region Public Properties
 
         public string Rule { get; set; }
-        public IICalendarCollection Calendars { get; set; }
+        public CalendarCollection Calendars { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public EventValidation(IResourceManager mgr, string rule, IICalendarCollection calendars) :
+        public EventValidation(IResourceManager mgr, string rule, CalendarCollection calendars) :
             base(mgr)
         {
             Rule = rule;
@@ -27,7 +25,7 @@ namespace DDay.iCal.Validator
 
         #region Protected Methods
 
-        protected abstract IValidationResultCollection ValidateEvent(IEvent evt);
+        protected abstract IValidationResultCollection ValidateEvent(CalendarEvent evt);
 
         #endregion
 
@@ -40,9 +38,9 @@ namespace DDay.iCal.Validator
 
             if (Calendars != null)
             {
-                foreach (IICalendar calendar in Calendars)
+                foreach (Calendar calendar in Calendars)
                 {
-                    foreach (IEvent evt in calendar.Events)
+                    foreach (CalendarEvent evt in calendar.Events)
                         result.Add(ValidateEvent(evt));
                 }
             }

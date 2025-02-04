@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Resources;
-using System.Reflection;
-using System.IO;
+﻿using Ical.Net.CalendarComponents;
+using Ical.Net.DataTypes;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
     public class InlineBinaryContentValidator : 
         Validation
     {
         #region Public Properties
 
-        public IICalendarCollection Calendars { get; set; }
+        public CalendarCollection Calendars { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public InlineBinaryContentValidator(IResourceManager mgr, IICalendarCollection calendars) :
+        public InlineBinaryContentValidator(IResourceManager mgr, CalendarCollection calendars) :
             base(mgr)
         {
             Calendars = calendars;
@@ -35,14 +31,14 @@ namespace DDay.iCal.Validator.RFC5545
             
             if (Calendars != null)
             {
-                foreach (IICalendar calendar in Calendars)
+                foreach (Calendar calendar in Calendars)
                 {
                     foreach (IUniqueComponent uc in calendar.UniqueComponents)
                     {
                         IRecurringComponent rc = uc as IRecurringComponent;
                         if (rc != null && rc.Attachments != null)
                         {
-                            foreach (IAttachment a in rc.Attachments)
+                            foreach (Attachment a in rc.Attachments)
                             {
                                 // Inline binary content (i.e. BASE64-encoded attachments) is not
                                 // recommended, and should only be used when absolutely necessary.

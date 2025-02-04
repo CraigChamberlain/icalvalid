@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ical.Net.CalendarComponents;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
 	public class EventRecurIDPropertyValidator :
         EventValidation
 	{
         #region Constructors
 
-        public EventRecurIDPropertyValidator(IResourceManager mgr, IICalendarCollection calendars) :
+        public EventRecurIDPropertyValidator(IResourceManager mgr, CalendarCollection calendars) :
             base(mgr, "eventRecurIDProperty", calendars)
         {
         }
@@ -18,7 +19,7 @@ namespace DDay.iCal.Validator.RFC5545
 
         #region Overrides
 
-        protected override IValidationResultCollection ValidateEvent(IEvent evt)
+        protected override IValidationResultCollection ValidateEvent(CalendarEvent evt)
         {
             return ValidationResult.GetCompositeResults(
                 ResourceManager,

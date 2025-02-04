@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Resources;
-using System.Reflection;
-using System.IO;
-
-namespace DDay.iCal.Validator.RFC5545
+﻿namespace Ical.Net.Validator.RFC5545
 {
     public class DateTimeValuesValidator : 
         Validation
     {
         #region Constructors
 
-        public DateTimeValuesValidator(IResourceManager mgr, IICalendarCollection calendars) :
+        public DateTimeValuesValidator(IResourceManager mgr, CalendarCollection calendars) :
             base(mgr)
         {
         }

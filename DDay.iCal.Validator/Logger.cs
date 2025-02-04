@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml;
-
-namespace DDay.iCal.Validator
+﻿namespace Ical.Net.Validator
 {
 
 	public class ConsoleLogger : ILogger

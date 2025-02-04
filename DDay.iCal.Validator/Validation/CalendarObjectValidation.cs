@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DDay.iCal.Validator
+﻿namespace Ical.Net.Validator
 {
     public abstract class CalendarObjectValidation :
         Validation
     {
         #region Public Properties
 
-        public IICalendarCollection Calendars { get; set; }
+        public CalendarCollection Calendars { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public CalendarObjectValidation(IResourceManager mgr, IICalendarCollection calendars) : base(mgr)
+        public CalendarObjectValidation(IResourceManager mgr, CalendarCollection calendars) : base(mgr)
         {
             Calendars = calendars;
         }
@@ -37,7 +33,7 @@ namespace DDay.iCal.Validator
             
             if (Calendars != null)
             {
-                foreach (IICalendar calendar in Calendars)
+                foreach (Calendar calendar in Calendars)
                 {
                     foreach (ICalendarObject obj in calendar.Children)
                         result.Add(ValidateObject(obj));

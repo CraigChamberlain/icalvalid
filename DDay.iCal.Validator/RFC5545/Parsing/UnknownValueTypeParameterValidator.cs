@@ -5,14 +5,14 @@ using System.Resources;
 using System.Reflection;
 using System.IO;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
     public class UnknownValueTypeParameterValidator : 
         CalendarObjectValidation
     {
         #region Constructors
 
-        public UnknownValueTypeParameterValidator(IResourceManager mgr, IICalendarCollection calendars) : base(mgr, calendars)
+        public UnknownValueTypeParameterValidator(IResourceManager mgr, CalendarCollection calendars) : base(mgr, calendars)
         {
         }
 
@@ -48,14 +48,14 @@ namespace DDay.iCal.Validator.RFC5545
 
                 foreach (ICalendarProperty p in c.Properties)
                 {
-                    foreach (ICalendarParameter parm in p.Parameters)
+                    foreach (CalendarParameter parm in p.Parameters)
                     {
                         if (parm.Values != null &&
-                            parm.Values.Length > 0 &&
+                            parm.ValueCount > 0 &&
                             string.Equals(parm.Name, "VALUE", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!validValues.Contains(parm.Values[0].ToUpper()))
-                                Warning(results, "unknownValueTypeParameterError", p.Line, p.Column, parm.Values[0], string.Join(", ", validValues.ToArray()));
+                            if (!validValues.Contains(parm.Values.First().ToUpper()))
+                                Warning(results, "unknownValueTypeParameterError", p.Line, p.Column, parm.Values.First(), string.Join(", ", validValues.ToArray()));
                         }
                     }
                 }

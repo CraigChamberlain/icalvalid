@@ -5,7 +5,7 @@ using System.Resources;
 using System.Reflection;
 using System.IO;
 
-namespace DDay.iCal.Validator.RFC5545
+namespace Ical.Net.Validator.RFC5545
 {
     public class EventDTEndDurationConflictValidator : 
         Validation

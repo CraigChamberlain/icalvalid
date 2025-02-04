@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Xml.Schema;
-using DDay.iCal.Validator.Xml;
+﻿using System.Text;
 
-namespace DDay.iCal.Validator.Serialization
+namespace Ical.Net.Validator.Serialization
 {
     public class TextValidationSerializer :
         IValidationSerializer

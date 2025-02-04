@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ical.Net.CalendarComponents;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class RecurringComponentDTStartRequiredValidation :
         PropertyCountValidation
@@ -28,12 +26,12 @@ namespace DDay.iCal.Validator
                     rc.RecurrenceRules.Count > 0)
                     MinCount = 1;
                 else if (
-                    rc is IEvent &&
+                    rc is CalendarEvent &&
                     (
                         // NOTE: if an iCalendar component cannot be found, then let's default
                         // to requiring the DTSTART property.
-                        rc.iCalendar == null ||
-                        rc.iCalendar.Method == null
+                        rc.Calendar == null ||
+                        rc.Calendar.Method == null
                     ))
                 {
                     MinCount = 1;

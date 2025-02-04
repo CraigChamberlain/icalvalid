@@ -1,40 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO.Compression;
 using System.Text;
-using ICSharpCode.SharpZipLib.Zip;
-using System.IO;
 
-namespace DDay.iCal.Validator
+
+namespace Ical.Net.Validator
 {
     public class ZipExtractor : 
         IDisposable,
         IEnumerable<string>
     {
-        FileStream _ZipFileStream = null;
-        ZipFile _ZipFile = null;
+        ZipArchive _ZipArchive = null;
 
         public ZipExtractor(string zipFilepath)
         {
-            _ZipFileStream = File.OpenRead(zipFilepath);
-            if (_ZipFileStream != null)
-            {
-                _ZipFile = new ZipFile(_ZipFileStream);
-            }
+            _ZipArchive = ZipFile.OpenRead(zipFilepath);
+
         }
 
         virtual public string GetFileContents(string pathToFileWithinZip)
         {
-            if (_ZipFile != null)
+            if (_ZipArchive != null)
             {
-                int index = _ZipFile.FindEntry(pathToFileWithinZip, true);
-                if (index >= 0)
+                var entry = _ZipArchive.GetEntry(pathToFileWithinZip);
+                if (entry is not null)
                 {
+                    
                     StringBuilder sb = new StringBuilder();
                     StringWriter sw = new StringWriter(sb);
 
                     string result = null;
                          
-                    Stream zis = _ZipFile.GetInputStream(index);
+                    Stream zis = entry.Open();
                     if (zis != null)
                     {
                         StreamReader sr = new StreamReader(zis);
@@ -52,16 +47,9 @@ namespace DDay.iCal.Validator
 
         virtual public void Dispose()
         {
-            if (_ZipFile != null)
+            if (_ZipArchive != null)
             {
-                _ZipFile.Close();
-                _ZipFile = null;
-            }
-            if (_ZipFileStream != null)
-            {
-                _ZipFileStream.Close();
-                _ZipFileStream.Dispose();
-                _ZipFileStream = null;
+                _ZipArchive.Dispose();
             }
         }
 
@@ -72,9 +60,9 @@ namespace DDay.iCal.Validator
         public IEnumerator<string> GetEnumerator()
         {
             List<string> files = new List<string>();
-            if (_ZipFile != null)
+            if (_ZipArchive != null)
             {
-                foreach (ZipEntry ze in _ZipFile)
+                foreach (ZipArchiveEntry ze in _ZipArchive.Entries)
                     files.Add(ze.Name);
             }
 

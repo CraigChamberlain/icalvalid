@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using DDay.iCal.Validator.Xml;
+using Ical.Net.Validator.Xml;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class ResourceManager :
         IResourceManager

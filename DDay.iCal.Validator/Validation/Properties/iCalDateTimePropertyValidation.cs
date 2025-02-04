@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ical.Net.DataTypes;
+using Ical.Net.CalendarComponents;
 using System.Text.RegularExpressions;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class iCalDateTimePropertyValidation :
         PropertyValidation
@@ -29,7 +28,9 @@ namespace DDay.iCal.Validator
                 // Ensure that the date-time (or date) value is formatted properly
                 bool hasTime = true;
                 if (p.Parameters.ContainsKey("VALUE") &&
-                    string.Equals(p.Parameters["VALUE"].Values[0], "DATE"))
+                    // TODO
+                    // May need to spit this or change DATE
+                    string.Equals(p.Parameters.Get("VALUE"), "DATE"))
                 {
                     hasTime = false;
                 }
@@ -73,11 +74,11 @@ namespace DDay.iCal.Validator
                     {
                         // Ensure that, if a time zone was provided on the date-time property,
                         // that the corresponding time zone is contained in the calendar.
-                        if (dt.TZID != null)
+                        if (dt.TzId != null)
                         {
-                            ITimeZone tz = p.iCalendar.GetTimeZone(dt.TZID);
+                            VTimeZone tz = p.Calendar.TimeZones.Where(t => t.TzId == dt.TzId).First();
                             if (tz == null)
-                                Error(result, "timeZoneNotFoundError", p.Line, p.Column, dt.TZID);
+                                Error(result, "timeZoneNotFoundError", p.Line, p.Column, dt.TzId);
                         }
                     }
                 }                   

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 using System.Reflection;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class ValidatorActivator
     {
@@ -12,7 +10,7 @@ namespace DDay.iCal.Validator
         static Dictionary<Type, ConstructorInfo> _CalendarConstructor = new Dictionary<Type, ConstructorInfo>();
 
 
-        static public IValidator Create(Type validatorType, IResourceManager mgr, IICalendarCollection calendars)
+        static public IValidator Create(Type validatorType, IResourceManager mgr, CalendarCollection calendars)
         {
             return Create(validatorType, mgr, calendars, null);
         }
@@ -22,7 +20,7 @@ namespace DDay.iCal.Validator
             return Create(validatorType, mgr, null, iCalendarText);
         }
 
-        static public IValidator Create(Type validatorType, IResourceManager mgr, IICalendarCollection calendars, string iCalendarText)
+        static public IValidator Create(Type validatorType, IResourceManager mgr, CalendarCollection calendars, string iCalendarText)
         {
             IValidator validator = null;
 
@@ -33,7 +31,7 @@ namespace DDay.iCal.Validator
                 if (iCalendarText != null)
                 {                    
                     if (!_CalendarPlusTextConstructor.ContainsKey(validatorType))
-                        _CalendarPlusTextConstructor[validatorType] = validatorType.GetConstructor(new Type[] { typeof(IResourceManager), typeof(string), typeof(IICalendarCollection) });
+                        _CalendarPlusTextConstructor[validatorType] = validatorType.GetConstructor(new Type[] { typeof(IResourceManager), typeof(string), typeof(CalendarCollection) });
                     ci = _CalendarPlusTextConstructor[validatorType];
                     if (ci != null)
                         validator = ci.Invoke(new object[] { mgr, iCalendarText, calendars }) as IValidator;
@@ -49,7 +47,7 @@ namespace DDay.iCal.Validator
                 if (validator == null)
                 {
                     if (!_CalendarConstructor.ContainsKey(validatorType))
-                        _CalendarConstructor[validatorType] = validatorType.GetConstructor(new Type[] { typeof(IResourceManager), typeof(IICalendarCollection) });
+                        _CalendarConstructor[validatorType] = validatorType.GetConstructor(new Type[] { typeof(IResourceManager), typeof(CalendarCollection) });
                     ci = _CalendarConstructor[validatorType];
                     if (ci != null)
                         validator = ci.Invoke(new object[] { mgr, calendars }) as IValidator;

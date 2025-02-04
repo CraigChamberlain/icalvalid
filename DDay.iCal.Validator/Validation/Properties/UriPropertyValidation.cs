@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace DDay.iCal.Validator
+﻿namespace Ical.Net.Validator
 {
     public class UriPropertyValidation :
         PropertyValidation

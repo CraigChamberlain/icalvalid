@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace DDay.iCal.Validator
+namespace Ical.Net.Validator
 {
     public class Debug
     {

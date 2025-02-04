@@ -4,10 +4,10 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using DDay.iCal.Validator.Xml;
+using Ical.Net.Validator.Xml;
 using System.Reflection;
 
-namespace DDay.iCal.Validator.Serialization
+namespace Ical.Net.Validator.Serialization
 {
     public class XmlValidationSerializer :
         IValidationSerializer
@@ -101,13 +101,14 @@ namespace DDay.iCal.Validator.Serialization
                     results.SetAttribute("datetime", now.ToString("yyyy-MM-dd") + "T" + now.ToString("hh:mm:ss"));
 					results.SetAttribute("permalink", permalink);
 
-                    // Indicate what version of DDay.iCal we're using...
+                    // TODO this is to update or remove.
+                    // Indicate what version of Ical.Net we're using...
                     XmlElement @using = doc.CreateElement("using", "http://icalvalid.wikidot.com/validation");
-                    @using.SetAttribute("name", "DDay.iCal");
-                    @using.SetAttribute("url", "http://www.ddaysoftware.com/Pages/Projects/DDay.iCal/");
+                    @using.SetAttribute("name", "Ical.Net");
+                    @using.SetAttribute("url", "http://www.ddaysoftware.com/Pages/Projects/Ical.Net/");
                     try
                     {
-                        Assembly dday_ical = Assembly.Load("DDay.iCal");
+                        Assembly dday_ical = Assembly.Load("Ical.Net");
                         @using.SetAttribute("version", dday_ical.GetName().Version.ToString());
                     }
                     catch
@@ -199,11 +200,11 @@ namespace DDay.iCal.Validator.Serialization
                             try
                             {
                                 // Attempt to gather some general information about the calendar...
-                                IICalendarCollection calendars = iCalendar.LoadFromStream(new StringReader(ValidationResults.CalendarText));
+                                CalendarCollection calendars = CalendarCollection.Load(new StringReader(ValidationResults.CalendarText));
                                 if (calendars != null)
                                 {
                                     XmlElement calendarInfos = doc.CreateElement("calendarInfos", "http://icalvalid.wikidot.com/validation");
-                                    foreach (IICalendar iCal in calendars)
+                                    foreach (Calendar iCal in calendars)
                                     {
                                         XmlElement calendarInfo = doc.CreateElement("calendarInfo", "http://icalvalid.wikidot.com/validation");
                                         calendarInfo.SetAttribute("timeZoneCount", iCal.TimeZones.Count.ToString());
@@ -212,7 +213,7 @@ namespace DDay.iCal.Validator.Serialization
                                         calendarInfo.SetAttribute("journalCount", iCal.Journals.Count.ToString());
                                         calendarInfo.SetAttribute("freeBusyCount", iCal.FreeBusy.Count.ToString());
                                         calendarInfo.SetAttribute("calendarVersion", iCal.Version);
-                                        calendarInfo.SetAttribute("prodID", iCal.ProductID);
+                                        calendarInfo.SetAttribute("prodID", iCal.ProductId);
 
                                         calendarInfos.AppendChild(calendarInfo);
                                     }

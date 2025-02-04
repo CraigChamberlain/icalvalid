@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
-namespace DDay.iCal.Validator.Xml
+namespace Ical.Net.Validator.Xml
 {
     public interface IXmlDocumentProvider :
         IEnumerable<string>
